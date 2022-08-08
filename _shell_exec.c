@@ -1,5 +1,6 @@
 #include "shell.h"
 #include <unistd.h>
+#include <sys/wait.h>
 
 /**
  * shell_exec - execute given command
@@ -8,12 +9,25 @@
  */
 void shell_exec(char **args)
 {
-    if (execve(args[0], args, NULL) != -1)
-    {
-        
-    }
-    else
-    {
-        perror(args[0]);
-    }
+	pid_t child_pid;
+	int status;
+
+	child_pid = fork();
+	if (child_pid == -1)
+	{
+		perror("Error:");
+		exit(1);
+	}
+	
+	if (!child_pid)
+	{
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror(args[0]);
+		}
+	}
+	else
+	{
+		wait(&status);
+	}
 }
