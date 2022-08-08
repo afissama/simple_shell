@@ -25,3 +25,17 @@ tokens *add_token(tokens **root, char str)
 	return (*temp_tok);
 }
 
+/**
+ * list_tokens_len - get tokens list length
+ * 
+ * @root: tokens list root element 
+ * Return: size of the token list
+ */
+unsigned int list_tokens_len(tokens *root)
+{
+	if (root == NULL)
+	{
+		return (0);
+	}
+	return (1 + list_tokens_len(root->next));
+}
