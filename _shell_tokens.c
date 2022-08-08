@@ -22,6 +22,7 @@ tokens *add_token(tokens **root, char str)
 		return (NULL);
 	}
 	(*temp_tok)->token = str;
+	(*temp_tok)->next = NULL;
 	return (*temp_tok);
 }
 
@@ -59,6 +60,6 @@ char **tokens_to_array(tokens *root)
 		tok_arr[i] = root->token;
 		i++;
 	}
-
+	tok_arr[i] = NULL;
 	return (tok_arr);
 }

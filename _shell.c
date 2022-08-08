@@ -7,9 +7,10 @@
  * Return: int
  */
 
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
 	char *buffer;
+	char **tokens;
 	size_t buf_len;
 
 	buf_len = 1024;
@@ -18,6 +19,8 @@ int main(void)
     while (shell_entry(&buffer, &buf_len) != -1)
     {
         printf("%s", buffer);
+		free(buffer);
     }
+	write(stdin, "\n", 1);
 	return 0;
 }

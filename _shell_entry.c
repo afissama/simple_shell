@@ -9,6 +9,6 @@
  */
 int shell_entry(char **buffer, size_t *buf_len)
 {
-	printf("$ ");
+	write(stdin, "$ ", 2);
 	return (getline(buffer, buf_len, stdin));
 }
