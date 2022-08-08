@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "shell.h"
 /**
  * @brief 
  * 
@@ -9,6 +10,6 @@
  */
 int shell_entry(char **buffer, size_t *buf_len)
 {
-	write(stdin, "$ ", 2);
+	write(1, "$ ", 2);
 	return (getline(buffer, buf_len, stdin));
 }

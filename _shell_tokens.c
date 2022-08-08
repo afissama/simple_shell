@@ -7,7 +7,7 @@
  * @param str
  * @return tokens*
  */
-tokens *add_token(tokens **root, char str)
+tokens *add_token(tokens **root, char *str)
 {
 	tokens **temp_tok;
 
@@ -51,14 +51,18 @@ char **tokens_to_array(tokens *root)
 {
 	unsigned int tok_size , i;
 	char **tok_arr;
-
 	tok_size = list_tokens_len(root);
 	i = 0;
 	tok_arr = malloc(tok_size *  sizeof(char *));
 	while (root != NULL)
 	{
-		tok_arr[i] = root->token;
-		i++;
+		if (root->token != NULL)
+		{
+			tok_arr[i] = malloc( _strlen(root->token) * sizeof(char));
+			tok_arr[i] = root->token;
+			i++;
+		}
+		root = root->next;
 	}
 	tok_arr[i] = NULL;
 	return (tok_arr);

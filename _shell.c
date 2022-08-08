@@ -7,10 +7,9 @@
  * Return: int
  */
 
-int main(int argc, char **argv, char **envp)
+int main(int argc __attribute__((unused)), char **argv __attribute__((unused)), char **envp __attribute__((unused)))
 {
 	char *buffer;
-	char **tokens;
 	size_t buf_len;
 
 	buf_len = 1024;
@@ -18,9 +17,8 @@ int main(int argc, char **argv, char **envp)
 
     while (shell_entry(&buffer, &buf_len) != -1)
     {
-        printf("%s", buffer);
-		free(buffer);
+        shell_exec(split_line(buffer));
     }
-	write(stdin, "\n", 1);
+	write(1, "\n", 1);
 	return 0;
 }
