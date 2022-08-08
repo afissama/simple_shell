@@ -2,10 +2,10 @@
 
 /**
  * add_token - add token to list
- * 
- * @param root 
- * @param str 
- * @return tokens* 
+ *
+ * @param root
+ * @param str
+ * @return tokens*
  */
 tokens *add_token(tokens **root, char str)
 {
@@ -27,8 +27,8 @@ tokens *add_token(tokens **root, char str)
 
 /**
  * list_tokens_len - get tokens list length
- * 
- * @root: tokens list root element 
+ *
+ * @root: tokens list root element
  * Return: size of the token list
  */
 unsigned int list_tokens_len(tokens *root)
@@ -38,4 +38,27 @@ unsigned int list_tokens_len(tokens *root)
 		return (0);
 	}
 	return (1 + list_tokens_len(root->next));
+}
+
+/**
+ * tokens_to_array - convert token struct to array
+ *
+ * @root: list root
+ * Return: array of char*
+ */
+char **tokens_to_array(tokens *root)
+{
+	unsigned int tok_size , i;
+	char **tok_arr;
+
+	tok_size = list_tokens_len(root);
+	i = 0;
+	tok_arr = malloc(tok_size *  sizeof(char *));
+	while (root != NULL)
+	{
+		tok_arr[i] = root->token;
+		i++;
+	}
+
+	return (tok_arr);
 }
