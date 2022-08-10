@@ -47,7 +47,7 @@ char **tokens_to_array(tokens *root);
 char *_strcat(char *dest, char *src);
 char *check_path(char *command);
 int move_to_rigth_dir(char *command);
-void shell_exec(char **args, char *prog);
+int shell_exec(char **args, char *prog);
 int shell_entry(char **buffer, size_t *buf_len);
 char **split_line(char *buffer, char *delimiters);
 #endif

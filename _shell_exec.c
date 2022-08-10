@@ -8,8 +8,9 @@
  *
  * @args: passing argumnents
  * @prog: the program name
+ * Return: int
  */
-void shell_exec(char **args, char *prog)
+int shell_exec(char **args, char *prog)
 {
 	pid_t child_pid;
 	int status;
@@ -18,32 +19,33 @@ void shell_exec(char **args, char *prog)
 	{
 		if (check_builtin(args[0]) == -1)
 		{
-			args[0] = check_path(args[0]);
-			if (args[0] == NULL)
+			if (check_path(args[0]) != NULL)
 			{
-				perror(prog);
-			}
-
-			child_pid = fork();
-			if (child_pid == -1)
-			{
-				perror("Error:");
-				exit(1);
-			}
-
-			if (!child_pid)
-			{
-				if (execve(args[0], args, environ) == -1)
+				child_pid = fork();
+				if (child_pid == -1)
 				{
-					perror(prog);
+					perror("Error:");
+					exit(1);
 				}
-			}
-			else
-			{
-				wait(&status);
+
+				if (!child_pid)
+				{
+					args[0] = check_path(args[0]);
+					if (execve(args[0], args, environ) == -1)
+					{
+						perror(prog);
+					}
+					exit(0);
+				}
+				else
+				{
+					wait(&status);
+				}
+				return (1);
 			}
 		}
 	}
+	return (0);
 }
 
 /**
@@ -81,7 +83,7 @@ char *check_path(char *command)
 			pos++;
 		}
 	}
-	return (NULL);
+	return (command);
 }
 
 /**
