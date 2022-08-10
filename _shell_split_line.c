@@ -1,11 +1,11 @@
 #include "shell.h"
 #include <string.h>
 /**
- * @brief 
- * 
- * @param buffer 
- * @param delimiters 
- * @return char** 
+ * split_line - split line according to its delimiters
+ *
+ * @buffer: buffer to execute
+ * @delimiters: delimiters for split
+ * Return: char**
  */
 char **split_line(char *buffer, char *delimiters)
 {

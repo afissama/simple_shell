@@ -12,7 +12,7 @@ int shell_entry(char **buffer, size_t *buf_len)
 {
 	int t_mode;
 
-	t_mode =isatty(STDIN_FILENO);
+	t_mode = isatty(STDIN_FILENO);
 	if (t_mode == 1)
 	{
 		write(STDOUT_FILENO, "$ ", 2);

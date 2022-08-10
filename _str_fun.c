@@ -47,8 +47,8 @@ char *_strcat(char *dest, char *src)
 
 /**
  * get_pathenv_var -  Get the pathenv var object
- * 
- * Return char* 
+ *
+ * Return: char*
  */
 char *get_pathenv_var()
 {
@@ -60,15 +60,15 @@ char *get_pathenv_var()
 	{
 		if (_str_startby("PATH=", environ[i]) == 0)
 		{
-			_path = malloc((_strlen(environ[i]) - 5 ) * sizeof(char));
+			_path = malloc((_strlen(environ[i]) - 5) * sizeof(char));
 			pos = 5;
 			while (environ[i][pos])
 			{
 				_path[pos - 5] = environ[i][pos];
 				pos++;
 			}
-			
-			return(_path);
+
+			return (_path);
 		}
 		i++;
 	}
@@ -98,7 +98,7 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _strcmp - compare if s2 start by s1
+ * _str_startby - check if s2 start by s1
  * @s1: fisrt string
  * @s2: second string
  *
@@ -114,7 +114,7 @@ int _str_startby(char *s1, char *s2)
 		{
 			return (-1);
 		}
-		
+
 		if (s1[i] > s2[i] || s1[i] < s2[i])
 		{
 			return (s1[i] - s2[i]);

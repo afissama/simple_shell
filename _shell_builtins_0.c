@@ -2,23 +2,24 @@
 /**
  * __exit - exit the shell
  *
- * @return int
+ * Return: int
  */
-int __exit()
+int __exit(void)
 {
 	exit(0);
-	return(0);
+	return (0);
 }
 
 /**
- * __env - prints the current environment
- * 
+ * __env - prints env
+ *
+ * Return: int
  */
-int __env()
+int __env(void)
 {
 	size_t pos_i;
 
-	pos_i =0;
+	pos_i = 0;
 	while (environ[pos_i])
 	{
 		write(1, environ[pos_i], _strlen(environ[pos_i]));
@@ -29,11 +30,11 @@ int __env()
 }
 /**
  * add_builtin - add new builtin to the end of list
- * 
+ *
  * @root: root elem
  * @name: comman name
  * @func: fucntion to execute
- * Return: a builtins* 
+ * Return: a builtins*
  */
 builtins *add_builtin(builtins **root, char *name, int(*func)(void))
 {

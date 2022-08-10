@@ -7,6 +7,7 @@
  * shell_exec - execute given command
  *
  * @args: passing argumnents
+ * @prog: the program name
  */
 void shell_exec(char **args, char *prog)
 {
@@ -46,12 +47,13 @@ void shell_exec(char **args, char *prog)
 }
 
 /**
- * @brief 
- * 
- * @param command 
- * @return char* 
+ * check_path - check the real path
+ * if it exist
+ *
+ * @command: Entry
+ * Return: char*
  */
-char* check_path(char *command)
+char *check_path(char *command)
 {
 	char *path;
 	char **directories;
@@ -84,19 +86,20 @@ char* check_path(char *command)
 
 /**
  * check_builtin - check if command is builtin
- * 
- * @command: command inserted 
+ *
+ * @command: command inserted
+ * Return: -1 on fail
  */
 int check_builtin(char *command)
 {
-	builtins *builtin_ ;
+	builtins *builtin_;
 
 	builtin_ = NULL;
 	add_builtin(&builtin_, "exit", __exit);
 	add_builtin(&builtin_, "env", __env);
 	while (builtin_ != NULL)
 	{
-		if ( _strcmp(command, builtin_->name) == 0)
+		if (_strcmp(command, builtin_->name) == 0)
 		{
 			return (builtin_->func());
 		}
