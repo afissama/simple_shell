@@ -21,15 +21,16 @@ typedef struct s_token
 typedef struct s_builtins
 {
     char *name;
-    void (*func)(void);
+    int (*func)(void);
     struct s_builtins *next;
 }builtins;
 
-builtins *add_builtin(builtins **root, char *name, void(*func)(void));
-void check_builtin(char *command);
+builtins *add_builtin(builtins **root, char *name, int(*func)(void));
+int check_builtin(char *command);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
-void __exit();
+int __exit();
+int __env();
 tokens *add_token(tokens **root, char *str);
 unsigned int list_tokens_len(tokens *root);
 int _str_startby(char *s1, char *s2);

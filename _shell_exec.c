@@ -15,32 +15,33 @@ void shell_exec(char **args, char *prog)
 
 	if (args[0] != NULL)
 	{
-		check_builtin(args[0]);
-	}
-	
-	args[0] = check_path(args[0]);
-	if (args[0] == NULL)
-	{
-		perror(prog);
-	}
-
-	child_pid = fork();
-	if (child_pid == -1)
-	{
-		perror("Error:");
-		exit(1);
-	}
-
-	if (!child_pid)
-	{
-		if (execve(args[0], args, environ) == -1)
+		if (check_builtin(args[0]) == -1)
 		{
-			perror(prog);
+			args[0] = check_path(args[0]);
+			if (args[0] == NULL)
+			{
+				perror(prog);
+			}
+
+			child_pid = fork();
+			if (child_pid == -1)
+			{
+				perror("Error:");
+				exit(1);
+			}
+
+			if (!child_pid)
+			{
+				if (execve(args[0], args, environ) == -1)
+				{
+					perror(prog);
+				}
+			}
+			else
+			{
+				wait(&status);
+			}
 		}
-	}
-	else
-	{
-		wait(&status);
 	}
 }
 
@@ -84,21 +85,23 @@ char* check_path(char *command)
 /**
  * check_builtin - check if command is builtin
  * 
- * @param command 
+ * @command: command inserted 
  */
-void check_builtin(char *command)
+int check_builtin(char *command)
 {
 	builtins *builtin_ ;
 
-
 	builtin_ = NULL;
 	add_builtin(&builtin_, "exit", __exit);
+	add_builtin(&builtin_, "env", __env);
 	while (builtin_ != NULL)
 	{
 		if ( _strcmp(command, builtin_->name) == 0)
 		{
-			builtin_->func();
+			return (builtin_->func());
 		}
 		builtin_ = builtin_->next;
 	}
+
+	return (-1);
 }
