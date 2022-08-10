@@ -1,18 +1,22 @@
 #include "shell.h"
 #include <string.h>
 /**
- * split_line - split the buffer according to delimiters
- *
- * @buffer: line
- * Return: char**
+ * @brief 
+ * 
+ * @param buffer 
+ * @param delimiters 
+ * @return char** 
  */
-char **split_line(char *buffer)
+char **split_line(char *buffer, char *delimiters)
 {
 	tokens *_token;
 	char *cur_tok;
-	char *delimiters;
 
-	delimiters = " \n";
+	if (buffer == NULL || delimiters == NULL)
+	{
+		return (NULL);
+	}
+
 	_token = malloc(sizeof(tokens *));
 	cur_tok = strtok(buffer, delimiters);
 	while (cur_tok != NULL)
