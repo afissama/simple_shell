@@ -7,7 +7,7 @@
  *
  * @args: passing argumnents
  */
-void shell_exec(char **args)
+void shell_exec(char **args, char *prog)
 {
 	pid_t child_pid;
 	int status;
@@ -23,7 +23,7 @@ void shell_exec(char **args)
 	{
 		if (execve(args[0], args, NULL) == -1)
 		{
-			perror(args[0]);
+			perror(prog);
 		}
 	}
 	else

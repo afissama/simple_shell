@@ -18,7 +18,7 @@ char **argv __attribute__((unused)))
 
 	while (shell_entry(&buffer, &buf_len) != -1)
 	{
-		shell_exec(split_line(buffer));
+		shell_exec(split_line(buffer), argv[0]);
 	}
 	return (0);
 }

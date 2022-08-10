@@ -12,7 +12,7 @@ int _strlen(char *s);
 tokens *add_token(tokens **root, char *str);
 unsigned int list_tokens_len(tokens *root);
 char **tokens_to_array(tokens *root);
-void shell_exec(char **args);
+void shell_exec(char **args, char *prog);
 int shell_entry(char **buffer, size_t *buf_len);
 char** split_line(char *buffer);
 #endif
