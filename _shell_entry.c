@@ -10,6 +10,12 @@
  */
 int shell_entry(char **buffer, size_t *buf_len)
 {
-	write(1, "$ ", 2);
+	int t_mode;
+
+	t_mode =isatty(STDIN_FILENO);
+	if (t_mode == 1)
+	{
+		write(STDOUT_FILENO, "$ ", 2);
+	}
 	return (getline(buffer, buf_len, stdin));
 }

@@ -12,7 +12,7 @@ char **argv __attribute__((unused)))
 {
 	char *buffer;
 	size_t buf_len;
-
+	
 	buf_len = 1024;
 	buffer = malloc(buf_len * sizeof(char));
 
@@ -20,6 +20,5 @@ char **argv __attribute__((unused)))
 	{
 		shell_exec(split_line(buffer));
 	}
-	write(1, "\n", 1);
 	return (0);
 }
