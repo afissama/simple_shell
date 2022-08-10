@@ -6,31 +6,39 @@
 extern char **environ;
 
 /**
- * @brief 
- * 
+ * struct s_token - singly token list
+ * @token: string - (malloc'ed string)
+ * @next: points to the next node
+ *
+ * Description: singly linked token list node structure
  */
 typedef struct s_token
 {
-    char *token;
-    struct s_token *next;
+	char *token;
+	struct s_token *next;
 } tokens;
+
 /**
- * @brief 
- * 
+ * struct s_builtins - singly builtins cmd list
+ * @name: string - (malloc'ed string)
+ * @func: function to execute
+ * @next: points to the next node
+ *
+ * Description: singly linked token list node structure
  */
 typedef struct s_builtins
 {
-    char *name;
-    int (*func)(void);
-    struct s_builtins *next;
-}builtins;
+	char *name;
+	int (*func)(void);
+	struct s_builtins *next;
+} builtins;
 
 builtins *add_builtin(builtins **root, char *name, int(*func)(void));
 int check_builtin(char *command);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
-int __exit();
-int __env();
+int __exit(void);
+int __env(void);
 tokens *add_token(tokens **root, char *str);
 unsigned int list_tokens_len(tokens *root);
 int _str_startby(char *s1, char *s2);
