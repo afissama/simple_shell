@@ -4,11 +4,26 @@
 #include <stdio.h>
 #include <unistd.h>
 extern char **environ;
+
+/**
+ * @brief 
+ * 
+ */
 typedef struct s_token
 {
     char *token;
     struct s_token *next;
 } tokens;
+/**
+ * @brief 
+ * 
+ */
+typedef struct builtins
+{
+char *name;
+int (*func)(void);
+} builtins;
+
 int _strlen(char *s);
 tokens *add_token(tokens **root, char *str);
 unsigned int list_tokens_len(tokens *root);

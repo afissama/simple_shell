@@ -13,6 +13,12 @@ void shell_exec(char **args, char *prog)
 	pid_t child_pid;
 	int status;
 
+	args[0] = check_path(args[0]);
+	if (args[0] == NULL)
+	{
+		perror(prog);
+	}
+
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -22,8 +28,7 @@ void shell_exec(char **args, char *prog)
 
 	if (!child_pid)
 	{
-		args[0] = check_path(args[0]);
-		if (execve(args[0], args, NULL) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
 			perror(prog);
 		}
@@ -52,7 +57,7 @@ char* check_path(char *command)
 	{
 		return (command);
 	}
-	
+
 	path = get_pathenv_var();
 	pos = 0;
 	if (path != NULL)
@@ -64,9 +69,9 @@ char* check_path(char *command)
 			if (stat(_strcat(tmp_dir, command), &st) == 0)
 			{
 				return (_strcat(tmp_dir, command));
-			}	
+			}
 			pos++;
 		}
 	}
-	return (command);
+	return (NULL);
 }
