@@ -18,13 +18,18 @@ typedef struct s_token
  * @brief 
  * 
  */
-typedef struct builtins
+typedef struct s_builtins
 {
-char *name;
-int (*func)(void);
-} builtins;
+    char *name;
+    void (*func)(void);
+    struct s_builtins *next;
+}builtins;
 
+builtins *add_builtin(builtins **root, char *name, void(*func)(void));
+void check_builtin(char *command);
+int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
+void __exit();
 tokens *add_token(tokens **root, char *str);
 unsigned int list_tokens_len(tokens *root);
 int _str_startby(char *s1, char *s2);

@@ -13,6 +13,11 @@ void shell_exec(char **args, char *prog)
 	pid_t child_pid;
 	int status;
 
+	if (args[0] != NULL)
+	{
+		check_builtin(args[0]);
+	}
+	
 	args[0] = check_path(args[0]);
 	if (args[0] == NULL)
 	{
@@ -53,10 +58,10 @@ char* check_path(char *command)
 	int pos;
 	struct stat st;
 
+	if (command == NULL)
+		return (NULL);
 	if (stat(command, &st) == 0)
-	{
 		return (command);
-	}
 
 	path = get_pathenv_var();
 	pos = 0;
@@ -74,4 +79,26 @@ char* check_path(char *command)
 		}
 	}
 	return (NULL);
+}
+
+/**
+ * check_builtin - check if command is builtin
+ * 
+ * @param command 
+ */
+void check_builtin(char *command)
+{
+	builtins *builtin_ ;
+
+
+	builtin_ = NULL;
+	add_builtin(&builtin_, "exit", __exit);
+	while (builtin_ != NULL)
+	{
+		if ( _strcmp(command, builtin_->name) == 0)
+		{
+			builtin_->func();
+		}
+		builtin_ = builtin_->next;
+	}
 }

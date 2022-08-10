@@ -10,14 +10,14 @@ void __exit()
 }
 
 /**
- * @brief 
+ * add_builtin - add new builtin to the end of list
  * 
- * @param root 
- * @param name 
- * @param func 
- * @return builtins* 
+ * @root: root elem
+ * @name: comman name
+ * @func: fucntion to execute
+ * Return: a builtins* 
  */
-builtins *add_builtin(builtins **root, char *name, int(*func)(void))
+builtins *add_builtin(builtins **root, char *name, void(*func)(void))
 {
 	builtins **temp;
 
@@ -26,8 +26,12 @@ builtins *add_builtin(builtins **root, char *name, int(*func)(void))
 	{
 		temp = &((*temp)->next);
 	}
-	
-	(*temp) = malloc(sizeof(builtins **));
+
+	(*temp) = malloc(sizeof(builtins *));
+	if ((*temp) == NULL)
+	{
+		return (NULL);
+	}
 	(*temp)->name = name;
 	(*temp)->func = func;
 	return (*temp);
