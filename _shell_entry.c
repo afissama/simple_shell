@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "shell.h"
 /**
- * @brief 
- * 
- * @param buffer 
- * @param buf_len 
- * @return size_t 
+ * shell_entry - Get our shell entry command
+ *
+ * @buffer: buffer enter by the user
+ * @buf_len: defined buf length
+ * Return: size_t
  */
 int shell_entry(char **buffer, size_t *buf_len)
 {

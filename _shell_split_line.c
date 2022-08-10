@@ -6,7 +6,7 @@
  * @buffer: line
  * Return: char**
  */
-char** split_line(char *buffer)
+char **split_line(char *buffer)
 {
 	tokens *_token;
 	char *cur_tok;

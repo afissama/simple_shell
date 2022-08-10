@@ -2,12 +2,13 @@
 /**
  * main - Main shell entry
  *
- * @argc - nb of args
- * @argv - arguments
+ * @argc: - nb of args
+ * @argv: - arguments
  * Return: int
  */
 
-int main(int argc __attribute__((unused)), char **argv __attribute__((unused)), char **envp __attribute__((unused)))
+int main(int argc __attribute__((unused)),
+char **argv __attribute__((unused)))
 {
 	char *buffer;
 	size_t buf_len;
@@ -15,10 +16,10 @@ int main(int argc __attribute__((unused)), char **argv __attribute__((unused)), 
 	buf_len = 1024;
 	buffer = malloc(buf_len * sizeof(char));
 
-    while (shell_entry(&buffer, &buf_len) != -1)
-    {
-        shell_exec(split_line(buffer));
-    }
+	while (shell_entry(&buffer, &buf_len) != -1)
+	{
+		shell_exec(split_line(buffer));
+	}
 	write(1, "\n", 1);
-	return 0;
+	return (0);
 }

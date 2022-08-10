@@ -3,9 +3,9 @@
 /**
  * add_token - add token to list
  *
- * @param root
- * @param str
- * @return tokens*
+ * @root: token root node
+ * @str: str to add
+ * Return: tokens*
  */
 tokens *add_token(tokens **root, char *str)
 {
@@ -49,8 +49,9 @@ unsigned int list_tokens_len(tokens *root)
  */
 char **tokens_to_array(tokens *root)
 {
-	unsigned int tok_size , i;
+	unsigned int tok_size, i;
 	char **tok_arr;
+
 	tok_size = list_tokens_len(root);
 	i = 0;
 	tok_arr = malloc(tok_size *  sizeof(char *));
@@ -58,7 +59,7 @@ char **tokens_to_array(tokens *root)
 	{
 		if (root->token != NULL)
 		{
-			tok_arr[i] = malloc( _strlen(root->token) * sizeof(char));
+			tok_arr[i] = malloc(_strlen(root->token) * sizeof(char));
 			tok_arr[i] = root->token;
 			i++;
 		}

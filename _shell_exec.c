@@ -4,8 +4,8 @@
 
 /**
  * shell_exec - execute given command
- * 
- * @args: passing argumnents 
+ *
+ * @args: passing argumnents
  */
 void shell_exec(char **args)
 {
@@ -18,7 +18,7 @@ void shell_exec(char **args)
 		perror("Error:");
 		exit(1);
 	}
-	
+
 	if (!child_pid)
 	{
 		if (execve(args[0], args, NULL) == -1)
