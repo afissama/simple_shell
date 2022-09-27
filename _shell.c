@@ -26,5 +26,6 @@ char **argv __attribute__((unused))
 	{
 		write(STDOUT_FILENO, "\n", 1);
 	}
+	free(buffer);
 	return (0);
 }
