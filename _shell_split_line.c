@@ -11,6 +11,7 @@ char **split_line(char *buffer, char *delimiters)
 {
 	tokens *_token;
 	char *cur_tok;
+	char **tokarr;
 
 	if (buffer == NULL || delimiters == NULL)
 	{
@@ -24,5 +25,8 @@ char **split_line(char *buffer, char *delimiters)
 		add_token(&_token, cur_tok);
 		cur_tok = strtok(NULL, delimiters);
 	}
-	return (tokens_to_array(_token));
+	free(cur_tok);
+	tokarr = tokens_to_array(_token);
+	free(_token);
+	return (tokarr);
 }

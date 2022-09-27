@@ -83,6 +83,9 @@ char *check_path(char *command)
 			pos++;
 		}
 	}
+	free(path);
+	free(tmp_dir);
+	free_double_char(directories);
 	return (command);
 }
 

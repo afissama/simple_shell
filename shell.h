@@ -34,6 +34,8 @@ typedef struct s_builtins
 } builtins;
 
 builtins *add_builtin(builtins **root, char *name, int(*func)(void));
+void free_double_char( char **opt);
+void free_builtin_struct( builtins *opt);
 int check_builtin(char *command);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
